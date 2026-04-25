@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function DashboardPage() {
-  const [profileData] = useState({
+  const [profileData, setProfileData] = useState({
     name: 'John Doe',
     email: 'john.doe@example.com',
     phoneNo: '+1 (555) 123-4567',
@@ -13,6 +13,33 @@ export default function DashboardPage() {
     bio: 'Passionate developer and tech enthusiast. Love building innovative solutions and collaborating with amazing teams.',
     skills: ['JavaScript', 'React', 'Node.js', 'MongoDB', 'UI/UX Design', 'Web Development']
   });
+
+  const fetchProfile = async()=>{
+    try{
+        const username = localStorage.getItem("username");
+        
+        const response = await fetch("https://profiler-mspi.onrender.com/api/user/profile", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({username})})
+
+        const data = await response.json();
+        if(response.ok){
+            setProfileData(data.user);
+        }else{
+            alert( "Failed to fetch profile data");
+        }
+    } catch (error) {
+        console.error("Error fetching profile data:", error);
+    }
+  }
+
+  useEffect(()=>{
+    fetchProfile();
+  }, [])
+
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'var(--bg-light)', padding: '40px 20px' }}>

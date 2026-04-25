@@ -19,6 +19,28 @@ export default function SignupPage() {
     }));
   };
 
+  const register = async ()=>{
+    try{
+        const response = await fetch("https://profiler-mspi.onrender.com/api/user/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+        if(response.ok){
+            alert("Registration successful! Please log in.");
+        }else{
+            alert( "Registration failed");
+        }
+
+    } catch (error) {
+        console.error("Error registering user:", error);
+    }
+  }
+
   return (
     <div className="container-main">
       <div className="card">
@@ -88,7 +110,7 @@ export default function SignupPage() {
             />
           </div>
 
-          <button type="button" className="btn-primary" style={{ width: '100%', marginTop: '10px' }}>
+          <button type="button" onClick={register} className="btn-primary" style={{ width: '100%', marginTop: '10px' }}>
             Create Account
           </button>
         </form>

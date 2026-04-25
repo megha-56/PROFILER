@@ -5,6 +5,30 @@ import { useState } from 'react';
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const login = async ()=>{
+    try{
+        const response = await fetch("https://profiler-mspi.onrender.com/api/user/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({username, password})
+        });
+
+        const data = await response.json();
+        if(response.ok){
+            alert("Login successful!");
+            const username = data.user.username;
+            localStorage.setItem("username", username);
+            window.location.href = "/dashboard";
+        }else{
+            alert( "Login failed");
+        }
+
+    } catch (error) {
+        console.error("Error logging in user:", error);
+    }
+  }
 
   return (
     <div className="container-main">
@@ -37,7 +61,7 @@ export default function LoginPage() {
             />
           </div>
 
-          <button type="button" className="btn-primary" style={{ width: '100%', marginTop: '10px' }}>
+          <button onClick={login} type="button" className="btn-primary" style={{ width: '100%', marginTop: '10px' }}>
             Sign In
           </button>
         </form>
