@@ -30,7 +30,8 @@ localStorage.setItem("username", username);
 window.location.href = "/dashboard";
 👉 Redirect user to dashboard
 
-
+//checks - Additional validation checks can be added here for extra security
+// such as checking IP address, device fingerprint, or session timeout
 
 
 
