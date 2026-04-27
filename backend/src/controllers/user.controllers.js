@@ -51,7 +51,7 @@ export const loginUser = async (req, res) => {
         res.status(500).json({message: "Server error"});
     }}
 
-    export const getUserProfile = async (req, res) => {
+export const getUserProfile = async (req, res) => {
         try{
             const {username} = req.body;
             const user = await User.findOne({

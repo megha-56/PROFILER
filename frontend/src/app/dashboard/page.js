@@ -14,6 +14,8 @@ export default function DashboardPage() {
     skills: ['JavaScript', 'React', 'Node.js', 'MongoDB', 'UI/UX Design', 'Web Development']
   });
 
+
+  //api
   const fetchProfile = async()=>{
     try{
         const username = localStorage.getItem("username");
@@ -35,7 +37,6 @@ export default function DashboardPage() {
         console.error("Error fetching profile data:", error);
     }
   }
-
   useEffect(()=>{
     fetchProfile();
   }, [])

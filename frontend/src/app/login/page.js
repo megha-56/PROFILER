@@ -5,18 +5,26 @@ import { useState } from 'react';
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  //api
   const login = async ()=>{
-    try{
-        const response = await fetch("https://profiler-mspi.onrender.com/api/user/login", {
+    try{ //fetch,{method,headers,body}
+        const response = await fetch("https://profiler-mspi.onrender.com/api/user/login", //url(after render)+route(of our backend), coma(',') is must
+            { 
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({username, password})
-        });
-
+            body: JSON.stringify({username, password}) 
+           }
+        );
+        
+        //convert in json
         const data = await response.json();
-        if(response.ok){
+        
+
+    //if response is ok,alert,
+        if(response.ok){ 
             alert("Login successful!");
             const username = data.user.username;
             localStorage.setItem("username", username);
