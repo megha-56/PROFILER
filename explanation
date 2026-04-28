@@ -1,0 +1,62 @@
+Step-by-step:
+1.User enters username & password in frontend
+
+2.Frontend sends POST request:
+/api/user/login
+
+3.Backend receives request:
+req.body = { username, password }
+
+4.Backend:
+*checks if fields exist
+*searches DB
+*compares password
+
+5.Backend sends response:
+{
+  "message": "Login successful",
+  "user": {...}
+}
+
+6.Frontend receives response:
+const data = await response.json();
+if(response.ok){
+👉 If status = 200 → success
+
+const username = data.user.username;
+localStorage.setItem("username", username);
+👉 Save username in browser storage
+
+window.location.href = "/dashboard";
+👉 Redirect user to dashboard
+
+
+
+
+
+
+
+🧩 KEY CONCEPTS YOU SHOULD REMEMBER
+1. Schema = Structure
+
+Defines how data looks in DB
+
+2. Model = Tool
+
+Used to interact with database
+
+3. Controller = Logic
+
+Handles request & response
+
+4. req (request)
+
+Data coming from frontend
+
+5. res (response)
+
+Data going to frontend
+
+6. API Connection
+
+Frontend → fetch() → Backend → DB → Response → Frontend

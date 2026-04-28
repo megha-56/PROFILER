@@ -29,26 +29,33 @@ export const registerUser = async (req, res) => {
     }
 }
 
-export const loginUser = async (req, res) => {
+export const loginUser = async (req, res) => { //req=data coming, res=what we send back
     try{
-        const {username, password} = req.body;
-        if(!username || !password){
-            return res.status(400).json({message: "Username and password are required"});
+        //extract username and password from request body
+        const {username, password} = req.body; 
+
+        // write conditions  
+
+        //required fields
+        if(!username || !password){ //if not username or password
+            return res.status(400).json({message: "Username and password are required"}); //send status ans json message in response //res.status().json()
+        }
+        
+        //Invalid username and Password
+        const user = await User.findOne({username}); //matches the username with the saved usernames,save the result in user variable
+        //username
+        if(!user){//if no user found
+            return res.status(400).json({message: "Invalid username or password"}); //return res.status.json
+        }
+        //Password
+        if(user.password !== password){//compare the passwords
+            return res.status(400).json({message: "Invalid username or password"}); //return res.status.json
         }
 
-        const user = await User.findOne({username});
-        if(!user){
-            return res.status(400).json({message: "Invalid username or password"});
-        }
-
-        if(user.password !== password){
-            return res.status(400).json({message: "Invalid username or password"});
-        }
-
-        res.status(200).json({message: "Login successful", user});
-    }catch(error){
-        console.error("Error logging in user:", error);
-        res.status(500).json({message: "Server error"});
+        res.status(200).json({message: "Login successful", user});//if everything is fine, res.status.json with messsage and user data 
+    }catch(error){//if something crashes
+        console.error("Error logging in user:", error);//log error 500
+        res.status(500).json({message: "Server error"});//res.status.json({})
     }}
 
 export const getUserProfile = async (req, res) => {

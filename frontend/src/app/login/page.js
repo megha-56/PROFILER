@@ -9,13 +9,13 @@ export default function LoginPage() {
   //api
   const login = async ()=>{
     try{ //fetch,{method,headers,body}
-        const response = await fetch("https://profiler-mspi.onrender.com/api/user/login", //url(after render)+route(of our backend), coma(',') is must
+        const response = await fetch("https://profiler-mspi.onrender.com/api/user/login", //backend Server->/api/user/login->loginUser Function runs  //url(after render)+route(of our backend), coma(',') is must
             { 
-            method: "POST",
+            method: "POST", //POST=sending data
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json" //I'am sending json data
             },
-            body: JSON.stringify({username, password}) 
+            body: JSON.stringify({username, password}) //converts js object to json string, this becomes{"username":"..." ,"password":"..." }
            }
         );
         
