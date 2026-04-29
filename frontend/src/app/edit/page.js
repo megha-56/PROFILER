@@ -156,8 +156,8 @@ const fetchProfile = async()=>{
   };
 
   return (
-    <div className="container-main ">
-      <div className="card ">
+    <div className="container-main  ">
+      <div className=" card ">
         <div  className="text-center">
           <h1 className="title">Edit Profile</h1>
           <p className="subtitle">Update your profile information</p>
@@ -407,9 +407,11 @@ const fetchProfile = async()=>{
       <style jsx>{`
   .container-main {
     min-height: 100vh;
+     height: auto;  
     display: flex;
     justify-content: center;
-    align-items: center;
+    // 
+    align-items: flex-start;
     padding: 20px;
   }
 
@@ -420,6 +422,8 @@ const fetchProfile = async()=>{
     padding: 24px;
     border-radius: 12px;
     box-sizing: border-box;
+    
+    
   }
 
   .form-input,
