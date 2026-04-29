@@ -78,8 +78,8 @@ export const getUserProfile = async (req, res) => {
 
 export const editProfile=async (req,res)=>{
     try{
-       const {name,username,email,password, phoneNo,pfp, gender, dob,bio, skills}= req.body;
-       if(!username||!password){
+       const {name,username,email, phoneNo,pfp, gender, dob,bio, skills}= req.body;
+       if(!username){
           return res.status(400).json({message: "Username and password are required"});
        }
        const user = await User.findOne({username}); //matches the username with the saved usernames,save the result in user variable
@@ -96,6 +96,10 @@ export const editProfile=async (req,res)=>{
         if (dob) user.dob=dob;
         if (bio) user.bio=bio;
         if (skills) user.skills=skills;
+        
         return res.status(200).json({message:"Profile updated successfully",user});
+    }catch(error){
+        console.error("Error updating user profile:", error);
+            res.status(500).json({message: "Server error"});
     }
 }
