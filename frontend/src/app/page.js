@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import LoginPage from './login/page';
+import LoginPage from './login/page.js';
 
-export default function LoginPage() {
+export default function Home() {
   return (
     <LoginPage/>
   );

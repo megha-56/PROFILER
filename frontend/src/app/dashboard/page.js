@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
+import Link from 'next/link'
+ 
 export default function DashboardPage() {
   const [profileData, setProfileData] = useState({
     name: 'John Doe',
@@ -16,6 +17,9 @@ export default function DashboardPage() {
 
 
   //api
+
+
+
   const fetchProfile = async()=>{
     try{
         const username = localStorage.getItem("username");
@@ -62,9 +66,9 @@ export default function DashboardPage() {
                 <p style={{ color: 'var(--text-gray)', fontSize: '14px' }}>@{profileData.username}</p>
               </div>
             </div>
-            <button className="btn-primary" style={{ padding: '10px 20px', fontSize: '14px' }}>
+            <Link href="/edit" className="btn-primary" style={{ padding: '10px 20px', fontSize: '14px' }}>
               Edit Profile
-            </button>
+            </Link>
           </div>
 
           {/* Personal Information Grid */}
