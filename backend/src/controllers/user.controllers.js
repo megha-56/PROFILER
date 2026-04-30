@@ -1,4 +1,5 @@
 import User from "../models/user.models.js";
+import bcrypt from 'bcrypt';
 
 export const registerUser = async (req, res) => {
     try{
@@ -12,17 +13,18 @@ export const registerUser = async (req, res) => {
         if(existingUser){
             return res.status(400).json({message: "User with this email, username or phone number already exists"});
         }
-
+         
+        const hashedPassword=await bcrypt.hash(password,10);
         const newUser = new User({
             name,
             username,
             email,
             phoneNo,
-            password
+            password:hashedPassword,
         });
-        
         await newUser.save();
         res.status(201).json({message: "User registered successfully", user: newUser});
+
     }catch(error){
         console.error("Error registering user:", error);
         res.status(500).json({message: "Server error"});
@@ -48,8 +50,14 @@ export const loginUser = async (req, res) => { //req=data coming, res=what we se
             return res.status(400).json({message: "Invalid username or password"}); //return res.status.json
         }
         //Password
-        if(user.password !== password){//compare the passwords
-            return res.status(400).json({message: "Invalid username or password"}); //return res.status.json
+        // if(user.password !== password){//compare the passwords
+        //     return res.status(400).json({message: "Invalid username or password"}); //return res.status.json
+        // }
+
+        const isPassordCorrect = await bcrypt.compare(password,user.password)
+        if(!isPassordCorrect){
+            return res.status(400).json({message: "Invalid username or password"});
+            
         }
 
         res.status(200).json({message: "Login successful", user});//if everything is fine, res.status.json with messsage and user data 
@@ -96,10 +104,39 @@ export const editProfile=async (req,res)=>{
         if (dob) user.dob=dob;
         if (bio) user.bio=bio;
         if (skills) user.skills=skills;
-        
+
         return res.status(200).json({message:"Profile updated successfully",user});
     }catch(error){
         console.error("Error updating user profile:", error);
             res.status(500).json({message: "Server error"});
+    }
+}
+
+export const changePassword=async(req,res)=>{
+    try{
+        const{username,oldPassword, newPassword}=req.body;
+
+        if(!username){
+            return res.status(400).json({message:"Please enter your username"})
+        }
+
+        const user=await User.findOne({username})
+        if(!user){
+            return res.status(400).json({message:"Incorrect username"})
+        }
+        
+        // if(user.password !== password){
+        //     return res.status(400).json({message:"Password is Incorrect"})
+        // }
+
+        //Old passwrod ko user ke pasword se check kri
+
+
+        //old password galat ho to error
+
+
+        //new password hash krke user.password save kra do
+
+    
     }
 }

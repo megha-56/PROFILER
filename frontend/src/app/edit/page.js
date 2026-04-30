@@ -96,7 +96,7 @@ const fetchProfile = async()=>{
       if (response.ok) {
         setMessage('Profile updated successfully!');
         setTimeout(() => {
-          window.location.href = '/dashboard';
+        //   window.location.href = '/dashboard';
         }, 1500);
       } else {
         setMessage(data.message || 'Update failed. Please try again.');
