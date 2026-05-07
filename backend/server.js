@@ -21,6 +21,8 @@ app.get('/', (req, res) => {
 
 //syntax for userRoutes
 app.use(express.json()); 
+
+
 app.use('/api/user', userRoutes); 
 
 

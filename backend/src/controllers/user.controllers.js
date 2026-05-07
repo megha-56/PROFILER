@@ -112,6 +112,7 @@ export const editProfile=async (req,res)=>{
     }
 }
 
+
 export const changePassword=async(req,res)=>{
     try{
         const{username,oldPassword, newPassword}=req.body;
@@ -138,5 +139,7 @@ export const changePassword=async(req,res)=>{
         //new password hash krke user.password save kra do
 
     
+    }catch(err){
+
     }
 }
