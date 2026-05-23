@@ -3,7 +3,9 @@ import bcrypt from 'bcrypt';
 
 export const registerUser = async (req, res) => {
     try{
-        const {name, username, email, phoneNo, password} = req.body;
+        const {name, username, email, phoneNo, password} = req.body; //step 1:request data 
+
+        //step 2: all conditons
         if(!name || !username || !email || !phoneNo || !password){
             return res.status(400).json({message: "All fields are required"});
         }
@@ -14,7 +16,7 @@ export const registerUser = async (req, res) => {
             return res.status(400).json({message: "User with this email, username or phone number already exists"});
         }
          
-        const hashedPassword=await bcrypt.hash(password,10);
+        const hashedPassword=await bcrypt.hash(password,10); //bcrypt 
         const newUser = new User({
             name,
             username,
@@ -23,7 +25,7 @@ export const registerUser = async (req, res) => {
             password:hashedPassword,
         });
         await newUser.save();
-        res.status(201).json({message: "User registered successfully", user: newUser});
+        res.status(201).json({message: "User registered successfully", user: newUser});// step 3: final response
 
     }catch(error){
         console.error("Error registering user:", error);
@@ -69,9 +71,8 @@ export const loginUser = async (req, res) => { //req=data coming, res=what we se
 export const getUserProfile = async (req, res) => {
         try{
             const {username} = req.body;
-            const user = await User.findOne({
-                username
-            });
+                    
+            const user = await User.findOne({username});               
             if(!user){
                 return res.status(404).json({message: "User not found"});
             }
@@ -138,7 +139,7 @@ export const changePassword=async(req,res)=>{
 
         //new password hash krke user.password save kra do
 
-    
+        
     }catch(err){
 
     }

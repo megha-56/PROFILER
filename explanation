@@ -61,3 +61,27 @@ Data going to frontend
 6. API Connection
 
 Frontend → fetch() → Backend → DB → Response → Frontend
+
+
+
+
+steps for controller:
+export const controllerName = async (req, res) => {
+   try {
+
+      // 1. get data
+
+      // 2. validate
+
+      // 3. database operation
+
+      // 4. business logic
+
+      // 5. response
+
+   } catch (error) {
+
+      // error handling
+
+   }
+};

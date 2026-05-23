@@ -12,22 +12,24 @@ const app = express();
 app.use(cors());
 dotenv.config();
 
-const PORT = 3000;
+
+//syntax for server
+const PORT = 8000;
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
 
-//syntax for userRoutes
-app.use(express.json()); 
+       
+app.use(express.json()); // userRoutes
 
 
-app.use('/api/user', userRoutes); 
+app.use('/api/user',userRoutes); //userRoutes
 
 
 app.listen(PORT, () => {
-    connectDB();
+    connectDB(); // connected to mongodb
     console.log(`Server is running on port ${PORT}`);
     }
 );
