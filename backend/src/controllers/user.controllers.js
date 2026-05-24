@@ -1,5 +1,6 @@
 import User from "../models/user.models.js";
 import bcrypt from 'bcrypt';
+import jwt from "jsonwebtoken";
 
 export const registerUser = async (req, res) => {
     try{
@@ -25,6 +26,7 @@ export const registerUser = async (req, res) => {
             password:hashedPassword,
         });
         await newUser.save();
+
         res.status(201).json({message: "User registered successfully", user: newUser});// step 3: final response
 
     }catch(error){

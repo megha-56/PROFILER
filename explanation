@@ -85,3 +85,51 @@ export const controllerName = async (req, res) => {
 
    }
 };
+
+
+
+
+
+
+
+//json web token
+ Step 1 — Install
+
+npm install jsonwebtoken
+Add to .env:
+
+
+JWT_SECRET=some_long_random_string
+Why a secret? The server signs tokens with this secret. Only someone who knows the secret can produce a valid token. If you leak it, anyone can forge a token for any user — so keep it in .env, never in code.
+
+
+After you've verified the user's password is correct:
+
+
+import jwt from "jsonwebtoken";
+
+const token = jwt.sign(
+  { id: user._id, email: user.email },   // payload
+  process.env.JWT_SECRET,                // secret
+  { expiresIn: "7d" }                    // options
+);
+What's happening:
+
+jwt.sign(...) takes your payload, base64-encodes it, then signs it with the secret → produces the xxx.yyy.zzz string.
+Payload — put only identifying info (user id, email). Never put the password. The payload is not encrypted, just encoded — anyone can decode and read it. The signature only prevents tampering, not reading.
+expiresIn: "7d" — token becomes invalid after 7 days. Forces re-login, limits damage if stolen.
+
+
+
+send to frontend
+        res.status(200).json({message: "Login successful", token});//if everything is fine, res.status.json with messsage and user data
+
+[ in frontend api]
+
+ if(response.ok){ 
+            alert("Login successful!");
+            const token = data.token; // Extract the token from the response data
+            localStorage.setItem("token", token); // Store the token in localStorage for later use
+            window.location.href = "/dashboard";
+        }
+[23/05/26, 5:00:30 PM] Megha: Kch krne
