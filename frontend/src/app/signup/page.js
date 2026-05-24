@@ -21,6 +21,7 @@ export default function SignupPage() {
 
   const register = async ()=>{
     try{
+      //fetch("url",{method,headers,body})
         const response = await fetch("https://profiler-mspi.onrender.com/api/user/register", {
             method: "POST",
             headers: {
@@ -29,7 +30,9 @@ export default function SignupPage() {
             body: JSON.stringify(formData)
         });
 
+      //convert in json
         const data = await response.json();
+      
         if(response.ok){
             alert("Registration successful! Please log in.");
         }else{
