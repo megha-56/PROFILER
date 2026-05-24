@@ -26,8 +26,16 @@ export const registerUser = async (req, res) => {
             password:hashedPassword,
         });
         await newUser.save();
+        
 
-        res.status(201).json({message: "User registered successfully", user: newUser});// step 3: final response
+        //token
+        const token=jwt.sign(
+            {id:user_id,eamil:user.email},//payload
+            process.env.JWT_SECRET,//secret
+            {expiresIn:"7d"} //options
+        )
+
+        res.status(201).json({message: "User registered successfully", user: newUser,token});// step 3: final response
 
     }catch(error){
         console.error("Error registering user:", error);
