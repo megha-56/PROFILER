@@ -73,7 +73,7 @@ export const loginUser = async (req, res) => { //req=data coming, res=what we se
         }
 
         const token=jwt.sign(
-            {id:user_id,eamil:user.email},//payload
+            {user_id:user.username,email:user.email},//payload
             process.env.JWT_SECRET,//secret
             {expiresIn:"7d"} //options
         )
