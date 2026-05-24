@@ -24,13 +24,19 @@ export default function LoginPage() {
         
 
     //if response is ok,alert,
-        if(response.ok){ 
-            alert("Login successful!");
-            const username = data.user.username;
-            localStorage.setItem("username", username);
+        // if(response.ok){ 
+        //     alert("Login successful!");
+        //     const username = data.user.username;
+        //     localStorage.setItem("username", username);
+        //     window.location.href = "/dashboard";
+        // }else{
+        //     alert( "Login failed");
+        // }
+        if(response.ok){
+            alert("Login successfull");
+            const token =data.token;
+            localStorage.setItem("token",token);
             window.location.href = "/dashboard";
-        }else{
-            alert( "Login failed");
         }
 
     } catch (error) {
