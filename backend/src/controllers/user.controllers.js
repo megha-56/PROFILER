@@ -64,7 +64,13 @@ export const loginUser = async (req, res) => { //req=data coming, res=what we se
             
         }
 
-        res.status(200).json({message: "Login successful", user});//if everything is fine, res.status.json with messsage and user data 
+        const token=jwt.sign(
+            {id:user_id,eamil:user.email},//payload
+            process.env.JWT_SECRET,//secret
+            {expiresIn:"7d"} //options
+        )
+
+        res.status(200).json({message: "Login successful",user,token});//if everything is fine, res.status.json with messsage and user data 
     }catch(error){//if something crashes
         console.error("Error logging in user:", error);//log error 500
         res.status(500).json({message: "Server error"});//res.status.json({})
