@@ -54,11 +54,12 @@ export default function EditProfilePage() {
 const fetchProfile = async()=>{
     try{
         const username = localStorage.getItem("username");
-        
+        const token=localStorage.getItem("token");//get token from localstorage
         const response = await fetch("https://profiler-mspi.onrender.com/api/user/profile", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "authorization":`Bearer ${token}`
             },
             body: JSON.stringify({username})})
 
