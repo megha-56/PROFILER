@@ -132,4 +132,32 @@ send to frontend
             localStorage.setItem("token", token); // Store the token in localStorage for later use
             window.location.href = "/dashboard";
         }
-[23/05/26, 5:00:30 PM] Megha: Kch krne
+
+
+*VERIFY TOKEN
+in middleware folder create a file veirfyToken.js
+
+import jwt from 'jsonwebtoken';
+
+const verifyToken = (req,res,next)=>{
+    // Get the token from the request header
+    const token = req.headers.authorization?.split("")[1];
+    if(!token){
+        return res.status(401).json({message:"Access denied. No token provided."});
+    }
+    try {
+        const user = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = user;
+        next();
+    } catch (error) {
+        return res.status(401).json({message:"Invalid token."});
+    }
+}
+
+export default verifyToken;
+
+// frontend req (method,url, body, headers) ------------verifyToken (method,url, body, headers, users)--------------- controller(users,method,url, body, headers)
+
+
+
+
