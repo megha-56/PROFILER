@@ -9,7 +9,7 @@ export default function LoginPage() {
   //api
   const login = async ()=>{
     try{ //fetch,{method,headers,body}
-        const response = await fetch("http://localhost:8000/api/user/login", //backend Server->/api/user/login->loginUser Function runs  //url(after render)+route(of our backend), coma(',') is must
+        const response = await fetch("https://profiler-mspi.onrender.com/api/user/login", //backend Server->/api/user/login->loginUser Function runs  //url(after render)+route(of our backend), coma(',') is must
             { 
             method: "POST", //POST=sending data
             headers: {
