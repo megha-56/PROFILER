@@ -55,7 +55,7 @@ const fetchProfile = async()=>{
     try{
         const username = localStorage.getItem("username");
         const token=localStorage.getItem("token");//get token from localstorage
-        const response = await fetch("http://localhost:8000/api/user/profile", {
+        const response = await fetch("https://profiler-mspi.onrender.com/api/user/profile", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -85,7 +85,7 @@ const fetchProfile = async()=>{
 
     try {
               const token=localStorage.getItem("token");//get token from localstorage
-      const response = await fetch('http://localhost:8000/api/user/edit', {
+      const response = await fetch('https://profiler-mspi.onrender.com/api/user/edit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
