@@ -1,4 +1,4 @@
-Step-by-step:
+/*Step-by-step:
 1.User enters username & password in frontend
 
 2.Frontend sends POST request:
@@ -161,3 +161,11 @@ export default verifyToken;
 
 
 
+
+//now in api , within the frontend
+//take token from the local storage
+const token=localStorage.getItem("token");
+//and give it within the headers
+"Authorization":`Bearer ${token}`
+
+*/
