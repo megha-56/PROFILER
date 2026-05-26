@@ -55,11 +55,11 @@ const fetchProfile = async()=>{
     try{
         const username = localStorage.getItem("username");
         const token=localStorage.getItem("token");//get token from localstorage
-        const response = await fetch("https://profiler-mspi.onrender.com/api/user/profile", {
+        const response = await fetch("http://localhost:8000/api/user/profile", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "authorization":`Bearer ${token}`
+                "Authorization":`Bearer ${token}`
             },
             body: JSON.stringify({username})})
 
@@ -84,10 +84,13 @@ const fetchProfile = async()=>{
     setMessage('');
 
     try {
-      const response = await fetch('https://profiler-mspi.onrender.com/api/user/edit', {
+              const token=localStorage.getItem("token");//get token from localstorage
+      const response = await fetch('http://localhost:8000/api/user/edit', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "Authorization":`Bearer ${token}`
+
         },
         body: JSON.stringify(formData)
       });
