@@ -22,7 +22,8 @@ export default function SignupPage() {
   const register = async ()=>{
     try{
       //fetch("url",{method,headers,body})
-        const response = await fetch("https://profiler-mspi.onrender.com/api/user/register", {
+        // const response = await fetch("https://profiler-mspi.onrender.com/api/user/register", {
+          const response = await fetch("http://localhost:3000/api/user/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
