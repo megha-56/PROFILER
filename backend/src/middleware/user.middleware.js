@@ -8,7 +8,7 @@ const verifyToken= (req,res,next)=>{
         return res.status(401).json({message:"Access denied, No token provided."})
     }
     try{
-        const user=json.verify(token,JWT_SECRET);
+        const user=jwt.verify(token,JWT_SECRET);
         req.user=user;
         next();
     }catch(error){
